@@ -41,7 +41,7 @@ def train_fn(
         d_scaler.step(opt_disc)
         d_scaler.update()
 
-        # Train generator
+        
         with torch.cuda.amp.autocast():
             D_fake = disc(x, y_fake)
             G_fake_loss = bce(D_fake, torch.ones_like(D_fake))
@@ -68,11 +68,11 @@ def train_fn(
 
 
 def plot_losses(all_gen_losses, all_disc_losses):
-    # Calcular la media de las pérdidas por epoch
+    
     gen_losses_mean = [sum(epoch_losses) / len(epoch_losses) for epoch_losses in all_gen_losses]
     disc_losses_mean = [sum(epoch_losses) / len(epoch_losses) for epoch_losses in all_disc_losses]
 
-    # Dividir el eje x por 17
+    
     epochs = list(range(1, len(gen_losses_mean) + 1))
     epochs_divided = [epoch / 908 for epoch in epochs]
 
