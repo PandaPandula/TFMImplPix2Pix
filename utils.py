@@ -19,8 +19,8 @@ def inference(gen, image, folder):
     x = image.to(config.DEVICE)
     gen.eval()
     with torch.no_grad():
-        y_fake = gen(x.unsqueeze(0))  # add a batch dimension
-        y_fake = y_fake * 0.5 + 0.5  # remove normalization
+        y_fake = gen(x.unsqueeze(0))  
+        y_fake = y_fake * 0.5 + 0.5  
         save_image(y_fake, folder + f"/y_gen_inference.png")
         save_image(x * 0.5 + 0.5, folder + f"/input_inference.png")
     gen.train()
@@ -40,7 +40,5 @@ def load_checkpoint(checkpoint_file, model, optimizer, lr):
     model.load_state_dict(checkpoint["state_dict"])
     optimizer.load_state_dict(checkpoint["optimizer"])
 
-    # If we don't do this then it will just have learning rate of old checkpoint
-    # and it will lead to many hours of debugging \:
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
