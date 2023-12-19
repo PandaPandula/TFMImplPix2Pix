@@ -11,16 +11,13 @@ def resize_images(input_folder, output_folder, target_width, target_height):
 
         try:
             with Image.open(input_path) as img:
-                # Redimensionar la imagen
                 resized_img = img.resize((target_width, target_height))
-                # Guardar la imagen redimensionada
                 resized_img.save(output_path)
                 print(f"Imagen {filename} redimensionada con éxito.")
         except Exception as e:
             print(f"Error al procesar la imagen {filename}: {str(e)}")
 
 if __name__ == "__main__":
-    # Especifica la carpeta de entrada y salida, así como el tamaño deseado
     input_folder = r"C:\Users\saixa\Downloads\archive(7)\bw"
     output_folder = r"C:\Users\saixa\Downloads\archive(7)\bwresized"
     target_width = 300
